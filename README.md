@@ -5,6 +5,8 @@
 
 ---
 
+![custom](http://i.imgur.com/JT85pgt.png?1)
+
 This is a **how to** in creating a custom reusable view using XIB's in Interface Builder.
   
 I will be creating a XIB file, a class which subclasses from `UIView` along with a model struct that represents a Weather object.
