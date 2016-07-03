@@ -152,7 +152,37 @@ private func commonInit() {
 
 Stick with me.
 
-* Whenever an instance of our `WeatherView` view object is created (whether that be in code or Interface Builder), `commonInit()` will be called on that instance. When that occurs, we load into memory the WeatherView.xib file which hooks up all our outlets as the `WeatherView.swift` file is its owner. Then, we add as a subview to `self`, `self` being the newly greated instance of `WeatherView` (again.. that will occur either in code somewhere or in Interface Builder which we will do later). The subview we're adding to `self` here is the `contentView` which contains **ALL** of those view elements we created. But.. how will that `contentView` constrain itself to the view it's now be placed inside of. It doesn't know how to do that so we set the `translatesAutoresizingMaskIntoConstraints` property on the `contentView` to `false` which allows us to programtically create constraints on it. So we do that. We then set the constraints of the `contentView` to equal `self'`s top, bottom, left, and right anchors. That constrains the `contentView` to fit perfectly into `self` (`self` again being the instance of `WeatherView`).
+* Whenever an instance of our `WeatherView` view object is created (whether that be in code or Interface Builder), `commonInit()` will be called on that instance. When that occurs, we load into memory the WeatherView.xib file which hooks up all our outlets as the `WeatherView.swift` file is its owner. Then, we add `contentView` as a subview to `self`, `self` being the newly greated instance of `WeatherView` (again.. that will occur either in code somewhere or in Interface Builder which we will do later). The subview we're adding to `self` here is the `contentView` which contains **ALL** of those view elements we created. But.. how will that `contentView` constrain itself to the view it's now be placed inside of. It doesn't know how to do that so we set the `translatesAutoresizingMaskIntoConstraints` property on the `contentView` to `false` which allows us to programtically create constraints on it. So we do that. We then set the constraints of the `contentView` to equal `self'`s top, bottom, left, and right anchors. That constrains the `contentView` to fit perfectly into `self` (`self` again being the instance of `WeatherView`).
+
+* Lets put this in action.
+
+---
+
+### Storyboad
+
+* To demonstrate how this will work, go to the Main.Storyboard file and drag out a View onto the canvas, like so:
+
+![storyboard](http://i.imgur.com/YI4AQAQ.png?1)
+
+
+* Here, I'm setting up the constraints of the view we just dragged in like so (making sure to adhere to that 2:1 proportion of constraints we created in the .xib file (600w, 300h) which looking back was a little aggressive. I should have kept the ratio but made it slightly smaller.
+
+![constraints](http://i.imgur.com/6bKcSYB.png)
+
+* Now select that View object that we just added constraints to and open the Identity Inspector like so:
+
+![identityf](http://i.imgur.com/lLafyXC.png?1)
+
+* Set the Class there underneath the Custom Class heading to `WeatherView`
+
+![setuptheview](http://i.imgur.com/AoQsrze.png)
+
+* That's it.
+
+* Build & Run:
+
+![blop](http://i.imgur.com/dynl0CE.png?1)
+
 
 
 
