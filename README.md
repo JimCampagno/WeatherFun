@@ -10,11 +10,6 @@ This is a how to in creating a custom reusable view using XIB's in Interface Bui
 I will be creating a XIB file, a class which subclasses from `UIView` along with a model struct that represents a Weather object.
 
 
-Lets get crazy!
-
-![CrazyLink](https://media.giphy.com/media/52HPgz8brngQg/giphy.gif)
-
-
 ## Instructions
 
 
