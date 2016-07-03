@@ -8,14 +8,22 @@
 
 import UIKit
 
-class WeatherView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+final class WeatherView: UIView {
+    
+    // If someone is to initialize a WeatherView in code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
     }
-    */
-
+    
+    // If someone is to initalize a WeatherView in Storyboard setting the Custom Class of a UIView
+     required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        //TODO: Do some stuff
+    }
+    
 }

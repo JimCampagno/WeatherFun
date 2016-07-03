@@ -58,3 +58,34 @@ I will be creating a XIB file, a class which subclasses from `UIView` along with
 
 ![WeatherView](http://i.imgur.com/DaodoP6.png?1)
 
+* Next, I added the following methods:
+
+```swift
+import UIKit
+
+final class WeatherView: UIView {
+    
+    // If someone is to initialize a WeatherView in code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    // If someone is to initalize a WeatherView in Storyboard setting the Custom Class of a UIView
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        //TODO: Do some stuff
+    }
+    
+}
+```
+
+* To take advantage of Static Dispatch (in that this WeatherView class will **NOT** be sublcalssed, I marked it final).
+* `init(frame:)` is inherited from `UIView`, WeatherView is subclassed from `UIView`. Here, we're overriding its implementation first calling on `super`'s implementation passing in the `frame` we receive in as  an argument.
+* `init?(coder:)` is inherited from `UIView`, but it was marked as required in `UIView`'s implemntation, because of that.. we are required to mark it as required as well. Similar to `init(frame:)` we are first calling on `super`'s implementation passing in the `NSCoder` object we receive.
+* You'll notice that both methods just described both call on `commonInit()` which is marked as a private function. Marking it private only allows for people within this particular .swift file (`WeatherView.swift`) to call on this method. This protects us from having this function get called from any other file.
+* 
