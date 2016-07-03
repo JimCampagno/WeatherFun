@@ -1,16 +1,19 @@
-# Weather Fun
+# Weather Fun - Custom Views
 
 * Swift 3
 * Xcode Version 8.0 beta (8S128d)
 
 ---
 
-This is a how to in creating a custom reusable view using XIB's in Interface Builder.
+This is a **how to** in creating a custom reusable view using XIB's in Interface Builder.
   
 I will be creating a XIB file, a class which subclasses from `UIView` along with a model struct that represents a Weather object.
 
 
 ## Instructions
+
+
+### Xib File
 
 
 * First, lets create the XIB file. File --> New will present us with this window:
@@ -38,3 +41,20 @@ I will be creating a XIB file, a class which subclasses from `UIView` along with
 
 
 ![Layout](http://i.imgur.com/SVKwJYv.png?1)
+
+---
+
+### View Class
+
+* Lets create a new Cocoa Touch Class like so:
+
+![NewFile](http://i.imgur.com/gsM69xl.png?1)
+
+* Make sure it's a subclass of `UIView`. I'm naming this view `WeatherView`.
+
+![UIViewSubclass](http://i.imgur.com/IRjwL6m.png?1)
+
+* The contents of your `WeatherView.swift` file should look like this:
+
+![WeatherView](http://i.imgur.com/DaodoP6.png?1)
+
