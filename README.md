@@ -13,7 +13,7 @@ I will be creating a XIB file, a class which subclasses from `UIView` along with
 ## Instructions
 
 
-### Xib File
+### XIB File
 
 
 * First, lets create the XIB file. File --> New will present us with this window:
@@ -88,4 +88,72 @@ final class WeatherView: UIView {
 * `init(frame:)` is inherited from `UIView`, WeatherView is subclassed from `UIView`. Here, we're overriding its implementation first calling on `super`'s implementation passing in the `frame` we receive in as  an argument.
 * `init?(coder:)` is inherited from `UIView`, but it was marked as required in `UIView`'s implemntation, because of that.. we are required to mark it as required as well. Similar to `init(frame:)` we are first calling on `super`'s implementation passing in the `NSCoder` object we receive.
 * You'll notice that both methods just described both call on `commonInit()` which is marked as a private function. Marking it private only allows for people within this particular .swift file (`WeatherView.swift`) to call on this method. This protects us from having this function get called from any other file.
-* 
+
+Hopefully, I have your full attention. If not (don't just keep reading). Go back and re-read any sections you glossed over. In making sure you understand this material, it's important that you understand every step of the way.
+
+![TimAllen](https://media.giphy.com/media/1GJJsdST4Ar5u/giphy.gif)
+
+Lets go back to the XIB file for a moment.
+
+---
+
+### Back to the XIB file
+
+* In the WeatherView.xib file, I'm selecting the File's Owner in the left pane like so:
+
+![FileOwner](http://i.imgur.com/JI9MEtX.png?1)
+
+* When File's Owner is selected, take a look in the top right underneath the selected Identity Inspector. Under **Custom Class** we can open the drop down menu under the option Class or type something in that box. Lets set it to our `WeatherView` class file.
+
+![SetupView](http://i.imgur.com/3v2fsPi.png?1)
+
+* Bring up the assistant editor now (I like mine split where I have the code portion at the bottom and the view elements on top):
+
+![AssistantEditor](http://i.imgur.com/Nob5Wqi.png?1)
+
+* Option drag from the `View` seen here in the following screenshot into your code as an Outlet and name it `contentView`.
+
+![view](http://i.imgur.com/7xn1Xpv.png)
+
+* After doing that, setup all of the other `UILabel`'s and `UIImageView` like so:
+
+![outlets](http://i.imgur.com/IaqNdJp.png?1)
+
+* Now we can access these view elements in code! Lets go back to the `WeatherView.swift` file now.
+
+---
+
+### Back to the View Class
+
+* Lets go back to the `WeatherView.swift` and implement the `commonInit()` method that is marked with a TODO.
+
+```swift
+private func commonInit() {
+        // 1. Load the nib named 'WeatherView' into memory, finding it in the main bundle.
+        Bundle.main().loadNibNamed("WeatherView", owner: self, options: [:])
+        
+        // 2. Adding the 'contentView' to self (self represents the instance of a WeatherView which is a 'UIView').
+        addSubview(contentView)
+        
+        // 3. Setting this false allows us to set our constraints on the contentView programtically
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
+        // 4. Setting the constraints programatically
+        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        contentView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        contentView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+    }
+```
+
+* I'm going to touch on 2. for a minute. The .xib file itself contains a `UIView` object (which we've been adding other `UIView` objects to.. the multiple labels and the imageView). The constraints  on those various view elements were made to what is now named `contentView` which is the `UIView` object in the .xib file. But.. here we are inside of `WeatherView` class, which is a sublcass of `UIView` which means it **IS** a `UIView`. Ok.. so we have two separate `UIView`'s here, but we know that the `WeatherView` acts as the **owner** of the `UIView` now named `contentView` in the `WeatherView.xib` file.
+
+![stickwithme](https://media.giphy.com/media/gKsJUddjnpPG0/giphy.gif)
+
+Stick with me.
+
+* Whenever an instance of our `WeatherView` view object is created (whether that be in code or Interface Builder), `commonInit()` will be called on that instance. When that occurs, we load into memory the WeatherView.xib file which hooks up all our outlets as the `WeatherView.swift` file is its owner. Then, we add as a subview to `self`, `self` being the newly greated instance of `WeatherView` (again.. that will occur either in code somewhere or in Interface Builder which we will do later). The subview we're adding to `self` here is the `contentView` which contains **ALL** of those view elements we created. But.. how will that `contentView` constrain itself to the view it's now be placed inside of. It doesn't know how to do that so we set the `translatesAutoresizingMaskIntoConstraints` property on the `contentView` to `false` which allows us to programtically create constraints on it. So we do that. We then set the constraints of the `contentView` to equal `self'`s top, bottom, left, and right anchors. That constrains the `contentView` to fit perfectly into `self` (`self` again being the instance of `WeatherView`).
+
+
+
+
