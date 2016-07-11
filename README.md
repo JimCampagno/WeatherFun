@@ -18,7 +18,7 @@ I will be creating a XIB file, a class which subclasses from `UIView` along with
 ### XIB File
 
 
-* First, lets create the XIB file. File --> New will present us with this window:
+* First, lets create the XIB file. File --> New --> File will present us with this window:
 
 ![FirstWindow](http://i.imgur.com/UduLhZO.png?1)
 
